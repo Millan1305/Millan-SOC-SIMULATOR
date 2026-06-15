@@ -1,35 +1,272 @@
-# AI-Powered SOC Security Automation Dashboard 🛡️
+# 🛡️ AI-Powered SOC Security Automation Dashboard
 
-An enterprise-grade, high-tech real-time Security Operations Center (SOC) simulator. This platform ingests Windows Security kernel events and raw network log structures, analyzes threat vectors using an AI Engine, and executes automated mitigation response containment actions (like IP blocking).
+An enterprise-grade Security Operations Center (SOC) simulation platform designed to demonstrate real-time threat monitoring, AI-driven security analytics, and automated incident response workflows.
+
+The system continuously ingests Windows Security Event Logs, analyzes activity using an AI-based threat scoring engine, and performs automated mitigation actions to simulate modern SOC operations.
+
+---
 
 ## 🚀 Features
-- **Real-Time Log Ingestion & Parsing:** Subprocess multi-threading architecture parsing system logs.
-- **AI Threat Scoring Engine:** Micro-scaled anomaly vector analyzer scoring inputs dynamically (0-100% scale).
-- **Automated Incident Response Engine:** Immediate isolation counters blocking malicious attacker nodes.
-- **Hitech Volatile Streaming Terminal:** Real-time fluid dark-mode UI with operational gauge counters and live streaming matrices feed.
 
-🚀 Steps to Run the Project (Live Pipeline)
-Follow these exact steps in order to boot up the complete automated security simulation framework:
+### 📥 Real-Time Log Collection
 
-Step 1: Start the Flask Gateway Server
-Open a normal terminal/PowerShell window, navigate to the backend folder, and launch the core API router:
+* Live ingestion of Windows Security Event Logs
+* Multi-threaded log collection architecture
+* Continuous event streaming pipeline
 
-PowerShell
+### 🤖 AI Threat Analysis Engine
+
+* Dynamic threat scoring (0–100%)
+* Behavioral anomaly detection
+* Risk-based event prioritization
+
+### ⚡ Automated Incident Response
+
+* Automatic malicious IP identification
+* Simulated containment and response actions
+* Real-time mitigation workflow execution
+
+### 📊 Interactive SOC Dashboard
+
+* Live event monitoring
+* Threat severity visualization
+* Security metrics and analytics
+* Dark-mode operational interface
+* Real-time streaming activity feed
+
+---
+
+## 🏗️ System Architecture
+
+```text
+Windows Security Logs
+          │
+          ▼
+System Log Collector
+          │
+          ▼
+Flask API Gateway
+          │
+          ▼
+AI Threat Analysis Engine
+          │
+          ▼
+Automated Response Engine
+          │
+          ▼
+SOC Security Dashboard
+```
+
+---
+
+## 🛠️ Tech Stack
+
+### Backend
+
+* Python
+* Flask
+* Flask-SocketIO
+* Threading
+* Windows Event Log API
+
+### Frontend
+
+* HTML5
+* CSS3
+* JavaScript
+* Socket.IO
+
+### Security Components
+
+* Log Collection Engine
+* Threat Scoring Engine
+* Alert Management System
+* Incident Response Module
+
+---
+
+## 📂 Project Structure
+
+```text
+AI-SOC-Simulator/
+│
+├── backend/
+│   ├── app.py
+│   ├── realtime_engine.py
+│   ├── system_log_collector.py
+│   ├── alert_system.py
+│   └── requirements.txt
+│
+├── frontend/
+│   ├── index.html
+│   ├── script.js
+│   ├── style.css
+│
+└── README.md
+```
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+* Python 3.10+
+* Windows Operating System
+* Administrator Privileges
+* Modern Web Browser
+
+---
+
+## ▶️ Running the Project
+
+### Step 1: Start the Flask Backend
+
+Open a terminal and run:
+
+```bash
 cd backend
 python app.py
-🎛️ Status Check: Leave this window running. The server will boot up locally at http://localhost:5000.
+```
 
-Step 2: Open PowerShell as Administrator
-To capture live Windows Security event logs from the OS kernel, the log collector script requires administrative privileges:
+Expected output:
 
-Click the Windows Start Menu, search for PowerShell.
+```text
+Server running on:
+http://localhost:5000
+```
 
-Right-click it and select "Run as Administrator".
+Keep this terminal running.
 
-Step 3: Launch the Windows Live Log Collector Daemon
-Inside the newly opened Administrator PowerShell window, navigate to your project's backend directory path and execute the streaming daemon:
+---
 
-PowerShell
-cd \path\To\Your\AI-SOC-Simulator\backend
+### Step 2: Open PowerShell as Administrator
+
+To access Windows Security Event Logs:
+
+1. Open Start Menu
+2. Search for PowerShell
+3. Right-click PowerShell
+4. Select "Run as Administrator"
+
+---
+
+### Step 3: Launch the Log Collector
+
+In the Administrator PowerShell window:
+
+```powershell
+cd path\to\AI-SOC-Simulator\backend
 python system_log_collector.py
-📡 Status Check: This terminal will enter an infinite loop, capturing local machine security traces (📥 [CAPTURED WIN_EVENT]) and continuously pushing them (🚀 [TRANSMITTED]) directly into the active Flask server.
+```
+
+Expected output:
+
+```text
+[CAPTURED] Windows Security Event
+[PARSED] Event Processed
+[TRANSMITTED] Sent to Server
+[ANALYZED] Threat Score Generated
+```
+
+The collector continuously streams security telemetry to the Flask backend.
+
+---
+
+### Step 4: Open the Dashboard
+
+Launch the frontend and access:
+
+```text
+http://localhost:3000
+```
+
+The dashboard provides:
+
+* Live Security Events
+* Threat Score Monitoring
+* Incident Severity Tracking
+* Security Metrics
+* Automated Response Visualization
+* Blocked IP Activity
+
+---
+
+## 🔄 Workflow
+
+```text
+Security Event Generated
+          │
+          ▼
+Event Captured
+          │
+          ▼
+Threat Analysis
+          │
+          ▼
+Risk Scoring
+          │
+          ▼
+Alert Generation
+          │
+          ▼
+Automated Response
+          │
+          ▼
+Dashboard Visualization
+```
+
+---
+
+## 📸 Dashboard Preview
+
+Add screenshots here:
+
+```text
+assets/dashboard-overview.png
+assets/live-events.png
+assets/threat-analysis.png
+assets/response-engine.png
+```
+
+---
+
+## 🎯 Learning Objectives
+
+This project demonstrates:
+
+* Security Operations Center (SOC) workflows
+* Security Information and Event Management (SIEM) concepts
+* Real-time log processing
+* Threat detection and analysis
+* Incident response automation
+* Security dashboard development
+* Flask and Socket.IO integration
+
+---
+
+## 🔮 Future Enhancements
+
+* Machine Learning-based anomaly detection
+* MITRE ATT&CK mapping
+* Threat intelligence integration
+* Role-Based Access Control (RBAC)
+* Multi-endpoint monitoring
+* Cloud log ingestion support
+* Advanced reporting and analytics
+
+---
+
+## 📄 License
+
+This project is intended for educational, research, and portfolio purposes.
+
+---
+
+## 👨‍💻 Author
+
+**Millan Kumar Behera**
+
+Cybersecurity Enthusiast | SOC Analyst | Security Automation Developer
+
+If you found this project useful, consider giving it a ⭐ on GitHub.
