@@ -1,0 +1,80 @@
+2026-08-15 08:00:01 INFO User john Login Success
+2026-08-15 08:00:15 INFO User john Opened Outlook
+2026-08-15 08:01:05 INFO User john Downloaded report.xlsx
+2026-08-15 08:03:20 INFO User alice Login Success
+2026-08-15 08:04:11 INFO User alice Access CRM
+2026-08-15 08:05:01 INFO Daily Backup Started
+2026-08-15 08:05:30 INFO Daily Backup Completed
+
+2026-08-15 08:10:01 WARNING Failed Login admin
+2026-08-15 08:10:03 WARNING Failed Login admin
+2026-08-15 08:10:05 WARNING Failed Login admin
+2026-08-15 08:10:07 WARNING Failed Login admin
+2026-08-15 08:10:09 WARNING Failed Login admin
+2026-08-15 08:10:11 WARNING Failed Login admin
+2026-08-15 08:10:13 WARNING Failed Login admin
+2026-08-15 08:10:15 WARNING Failed Login admin
+2026-08-15 08:10:17 WARNING Failed Login admin
+2026-08-15 08:10:19 WARNING Failed Login admin
+2026-08-15 08:10:21 WARNING Failed Login admin
+2026-08-15 08:10:23 WARNING Failed Login admin
+
+2026-08-15 08:15:01 PORT_SCAN 192.168.1.50 PORT 21
+2026-08-15 08:15:02 PORT_SCAN 192.168.1.50 PORT 22
+2026-08-15 08:15:03 PORT_SCAN 192.168.1.50 PORT 23
+2026-08-15 08:15:04 PORT_SCAN 192.168.1.50 PORT 25
+2026-08-15 08:15:05 PORT_SCAN 192.168.1.50 PORT 53
+2026-08-15 08:15:06 PORT_SCAN 192.168.1.50 PORT 80
+2026-08-15 08:15:07 PORT_SCAN 192.168.1.50 PORT 110
+2026-08-15 08:15:08 PORT_SCAN 192.168.1.50 PORT 135
+2026-08-15 08:15:09 PORT_SCAN 192.168.1.50 PORT 139
+2026-08-15 08:15:10 PORT_SCAN 192.168.1.50 PORT 143
+2026-08-15 08:15:11 PORT_SCAN 192.168.1.50 PORT 443
+2026-08-15 08:15:12 PORT_SCAN 192.168.1.50 PORT 445
+2026-08-15 08:15:13 PORT_SCAN 192.168.1.50 PORT 3389
+
+2026-08-15 08:20:01 BLACKLISTED_IP 45.12.33.10 LOGIN_ATTEMPT
+2026-08-15 08:20:05 BLACKLISTED_IP 45.12.33.10 FILE_ACCESS
+2026-08-15 08:20:10 BLACKLISTED_IP 111.22.44.55 POWERSHELL_EXECUTION
+
+2026-08-15 08:25:01 SUSPICIOUS User test Access Restricted Folder
+2026-08-15 08:25:05 SUSPICIOUS User test Unauthorized Access
+2026-08-15 08:25:10 SUSPICIOUS User test Privilege Escalation Attempt
+2026-08-15 08:25:15 SUSPICIOUS User test Exploit Detected
+
+2026-08-15 08:30:01 ALERT Malware Detected Trojan.Win32.Agent
+2026-08-15 08:30:05 ALERT Malware Detected Backdoor.Agent
+2026-08-15 08:30:10 ALERT Malware Quarantined
+
+2026-08-15 08:35:01 ALERT Ransomware Activity Detected
+2026-08-15 08:35:05 ALERT Multiple File Encryption Detected
+2026-08-15 08:35:10 ALERT Shadow Copies Deleted
+
+2026-08-15 08:40:01 POWERSHELL EncodedCommand Execution
+2026-08-15 08:40:05 POWERSHELL DownloadString Used
+2026-08-15 08:40:10 CMD whoami /priv
+2026-08-15 08:40:15 CMD net user administrator
+
+2026-08-15 08:45:01 INFO User manager Login Success
+2026-08-15 08:45:10 INFO User manager Database Access
+2026-08-15 08:45:15 INFO User manager Exported customer_data.csv
+2026-08-15 08:45:20 INFO User manager Exported payroll.xlsx
+
+2026-08-15 08:50:01 DATA_EXFIL Upload 500MB external-storage.com
+2026-08-15 08:50:05 DATA_EXFIL Upload 750MB external-storage.com
+2026-08-15 08:50:10 DATA_EXFIL Upload 1GB external-storage.com
+
+2026-08-15 08:55:01 INFO User alice Login Success
+2026-08-15 08:55:10 INFO User alice Email Sent
+2026-08-15 08:55:20 INFO User alice Logout
+
+2026-08-15 09:00:01 ALERT Malware Detected
+2026-08-15 09:00:05 ALERT Exploit Attempt
+2026-08-15 09:00:10 ALERT Unauthorized Access
+2026-08-15 09:00:15 ALERT Privilege Escalation
+2026-08-15 09:00:20 ALERT Ransomware Detected
+
+2026-08-15 09:05:01 INFO Security Team Investigation Started
+2026-08-15 09:06:01 INFO Host Isolated
+2026-08-15 09:07:01 INFO Incident Response Triggered
+2026-08-15 09:08:01 INFO Threat Contained

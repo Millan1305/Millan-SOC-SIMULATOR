@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI SOC Security Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app-container">
+    <aside class="sidebar">
+        <div class="logo">
+            <i data-lucide="shield-alert" class="icon-logo"></i>
+            <h2>AI-SOC</h2>
+        </div>
+        <nav class="nav-links">
+            <a href="#" class="active"><i data-lucide="layout-dashboard"></i> Dashboard</a>
+            <a href="#"><i data-lucide="shield-ban"></i> Threats</a>
+            <a href="#"><i data-lucide="file-text"></i> Logs</a>
+            <a href="#"><i data-lucide="alert-triangle"></i> Incidents</a>
+            <a href="#"><i data-lucide="bar-chart-3"></i> Analytics</a>
+            <a href="#"><i data-lucide="settings"></i> Settings</a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <header class="header">
+            <div>
+                <h1>AI SOC SECURITY DASHBOARD</h1>
+                <p>Enterprise Security Operations Center <span class="divider">|</span> Real-Time Threat Monitoring</p>
+            </div>
+            <div class="status-badge">
+                <span class="dot pulse"></span>
+                <span class="status-text">SYSTEM ONLINE</span>
+            </div>
+        </header>
+
+        <section class="grid kpi-grid">
+            <div class="card kpi-card">
+                <div class="kpi-info">
+                    <h4>Total Logs</h4>
+                    <h1 id="totalLogs">0</h1>
+                </div>
+                <div class="kpi-icon blue"><i data-lucide="database"></i></div>
+            </div>
+            <div class="card kpi-card danger">
+                <div class="kpi-info">
+                    <h4>Critical Events</h4>
+                    <h1 id="criticalCount">0</h1>
+                </div>
+                <div class="kpi-icon red"><i data-lucide="zap"></i></div>
+            </div>
+            <div class="card kpi-card warn">
+                <div class="kpi-info">
+                    <h4>Threat Score</h4>
+                    <h1 id="threatScore">0</h1>
+                </div>
+                <div class="kpi-icon yellow"><i data-lucide="activity"></i></div>
+            </div>
+            <div class="card kpi-card success">
+                <div class="kpi-info">
+                    <h4>Blocked IPs</h4>
+                    <h1 id="blockedIPs">0</h1>
+                </div>
+                <div class="kpi-icon green"><i data-lucide="shield-check"></i></div>
+            </div>
+        </section>
+
+        <section class="card upload-section">
+            <div class="upload-header">
+                <h3><i data-lucide="upload-cloud"></i> Upload Security Logs</h3>
+                <p>Upload .log or .txt files for automated AI threat vector analysis.</p>
+            </div>
+            <div class="upload-controls">
+                <div class="file-drop-zone">
+                    <input type="file" id="fileInput" accept=".log,.txt" onchange="handleFileSelect()">
+                    <label for="fileInput" id="fileLabel" class="btn-secondary">Choose File</label>
+                </div>
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="uploadFile()">Analyze Logs</button>
+                    <button class="btn btn-outline" onclick="exportReport()"><i data-lucide="download"></i> Reset Stats</button>
+                </div>
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar-wrapper">
+                    <div id="progressBar" class="progress-bar-fill" style="width: 0%"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="grid chart-grid-2col">
+            <div class="card chart-card">
+                <h3>Threat Distribution</h3>
+                <div class="chart-container">
+                    <canvas id="threatChart"></canvas>
+                </div>
+            </div>
+            <div class="card chart-card">
+                <h3>Severity Analysis</h3>
+                <div class="chart-container">
+                    <canvas id="severityChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section class="card chart-card full-width">
+            <h3>Threat Timeline Tracker</h3>
+            <div class="chart-container visual-trend">
+                <canvas id="trendChart"></canvas>
+            </div>
+        </section>
+
+        <section class="grid chart-grid-2col">
+            <div class="card table-card">
+                <h3>Top Attackers</h3>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>IP Address</th>
+                                <th align="right">Attack Count</th>
+                            </tr>
+                        </thead>
+                        <tbody id="attackerTable">
+                            <tr><td colspan="2" style="color:#8b949e; text-align:center;">Awaiting telemetry...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card table-card">
+                <h3>Recent Security Incidents</h3>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Vector Type</th>
+                                <th>Risk Level</th>
+                            </tr>
+                        </thead>
+                        <tbody id="incidentTable">
+                            <tr><td colspan="3" style="color:#8b949e; text-align:center;">Awaiting active alerts...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section class="grid chart-grid-2col live-section">
+            <div class="card feed-card">
+                <h3><span class="live-indicator"><span class="dot pulse-red"></span></span> Raw Logs Stream</h3>
+                <div id="liveFeed" class="feed-container logs-stream"></div>
+            </div>
+            <div class="card feed-card">
+                <h3><i data-lucide="bell" class="alert-bell"></i> Mitigated Threat Actions</h3>
+                <div id="alerts" class="feed-container alert-stream"></div>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>AI SOC Platform v2.4.0 <span class="divider">|</span> Real-Time Threat Intelligence Engine</p>
+        </footer>
+    </main>
+</div>
+
+<script>
+    const API_BASE = "http://localhost:5000";
+
+    // Chart Object Global Variables to clear memory stacks accurately
+    let threatChartObj = null;
+    let severityChartObj = null;
+    let trendChartObj = null;
+
+    function handleFileSelect() {
+        const input = document.getElementById('fileInput');
+        const label = document.getElementById('fileLabel');
+        if(input.files && input.files.length > 0) {
+            label.innerText = input.files[0].name;
+        }
+    }
+
+    async function updateDashboardMetrics() {
+        try {
+            // 1. Fetch Dynamic Dashboard Stats Matrix Counter parameters
+            const statsRes = await fetch(`${API_BASE}/dashboard-stats`);
+            const stats = await statsRes.json();
+            
+            if(!stats.error) {
+                document.getElementById('totalLogs').innerText = Number(stats.total_logs || 0).toLocaleString();
+                document.getElementById('criticalCount').innerText = stats.critical || 0;
+                document.getElementById('threatScore').innerText = Math.round(stats.threat_score || 0);
+            }
+
+            // 2. Fetch Top Malicious Attacking Node IPs Data Sets
+            const attackersRes = await fetch(`${API_BASE}/top-attackers`);
+            const attackersData = await attackersRes.json();
+            const attackerTable = document.getElementById('attackerTable');
+            attackerTable.innerHTML = "";
+            
+            if(attackersData.attackers && attackersData.attackers.length > 0) {
+                attackersData.attackers.forEach(item => {
+                    attackerTable.innerHTML += `<tr><td><code>${item.ip}</code></td><td align="right" style="color:#ff7b72; font-weight:bold;">${item.count}</td></tr>`;
+                });
+            } else {
+                attackerTable.innerHTML = `<tr><td colspan="2" style="color:#8b949e; text-align:center;">No data found</td></tr>`;
+            }
+
+            // 3. Update Global Data Feeds summaries and Incidents Tracking Layout charts elements
+            const summaryRes = await fetch(`${API_BASE}/threat-summary`);
+            const summary = await summaryRes.json();
+            
+            if(summary && !summary.error) {
+                renderPieCharts(summary);
+            }
+
+            // 4. Update Logs Streams views onto console viewport terminals
+            const logsRes = await fetch(`${API_BASE}/logs`);
+            const logsList = await logsRes.json();
+            renderLiveLogsStreams(logsList);
+
+        } catch (err) {
+            console.error("SOC Core API Metrics Synchronization Interrupted:", err);
+        }
+    }
+
+    function renderPieCharts(summary) {
+        // Threat Distribution Chart Logic setup arrays
+        const threatCtx = document.getElementById('threatChart').getContext('2d');
+        const labels = summary.top_attacks ? summary.top_attacks.map(x => x[0]) : ["NORMAL"];
+        const values = summary.top_attacks ? summary.top_attacks.map(x => x[1]) : [1];
+
+        if(threatChartObj) threatChartObj.destroy();
+        threatChartObj = new Chart(threatCtx, {
+            type: 'doughnut',
+            data: {
+                labels: labels,
+                datasets: [{
+                    data: values,
+                    backgroundColor: ['#ff7b72', '#f0883e', '#58a6ff', '#21262d']
+                }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { labels: { color: '#c9d1d9' } } } }
+        });
+
+        // Severity Distribution Analysis setup blocks
+        const sevCtx = document.getElementById('severityChart').getContext('2d');
+        const dist = summary.severity_distribution || {};
+        
+        if(severityChartObj) severityChartObj.destroy();
+        severityChartObj = new Chart(sevCtx, {
+            type: 'bar',
+            data: {
+                labels: Object.keys(dist),
+                datasets: [{
+                    label: 'Events Count',
+                    data: Object.values(dist),
+                    backgroundColor: '#3fb950'
+                }]
+            },
+            options: { 
+                responsive: true, 
+                maintainAspectRatio: false, 
+                scales: { 
+                    x: { ticks: { color: '#c9d1d9' } }, 
+                    y: { ticks: { color: '#c9d1d9' } } 
+                },
+                plugins: { legend: { display: false } }
+            }
+        });
+    }
+
+    function renderLiveLogsStreams(logs) {
+        const liveFeed = document.getElementById('liveFeed');
+        const alertsFeed = document.getElementById('alerts');
+        const incidentTable = document.getElementById('incidentTable');
+        
+        liveFeed.innerHTML = "";
+        alertsFeed.innerHTML = "";
+        incidentTable.innerHTML = "";
+
+        if(!logs || logs.length === 0) return;
+
+        // Populate Raw Ingestion Logs Terminal view block entries
+        logs.slice(0, 15).forEach(log => {
+            liveFeed.innerHTML += `<div class="log-row"><span>[${log.timestamp}]</span> <code>${log.source_ip}</code> -> ${log.message.substring(0, 80)}...</div>`;
+            
+            // Generate Incident rules verification elements checks matches profiles
+            if(log.severity === "CRITICAL" || log.severity === "HIGH") {
+                alertsFeed.innerHTML += `<div class="alert-item crit"><strong>[MITIGATED ACTION]</strong> Threat Target detected from <code>${log.source_ip}</code>. Action: Automated Firewall Rules Blocked.</div>`;
+                incidentTable.innerHTML += `<tr><td>${log.timestamp}</td><td><span class="badge red">${log.attack_type || 'INCIDENT'}</span></td><td style="color:#ff7b72; font-weight:bold;">${log.severity}</td></tr>`;
+            }
+        });
+
+        if(incidentTable.innerHTML === "") {
+            incidentTable.innerHTML = `<tr><td colspan="3" style="color:#8b949e; text-align:center;">No high risk incidents reported</td></tr>`;
+        }
+        
+        lucide.createIcons();
+    }
+
+    async function uploadFile() {
+        const fileInput = document.getElementById('fileInput');
+        const progressBar = document.getElementById('progressBar');
+        
+        if(!fileInput.files || fileInput.files.length === 0) {
+            alert("Please provide a valid security log file element before starting parser execution.");
+            return;
+        }
+
+        const file = fileInput.files[0];
+        const text = await file.text();
+        const lines = text.split('\n').filter(l => l.trim() !== "");
+        
+        progressBar.style.width = "0%";
+        let processed = 0;
+
+        for(let line of lines) {
+            try {
+                await fetch(`${API_BASE}/ingest-log`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ "log": line })
+                });
+            } catch(e) {
+                console.error("Ingestion dropped down frame chunk error:", e);
+            }
+            processed++;
+            let pct = Math.round((processed / lines.length) * 100);
+            progressBar.style.width = `${pct}%`;
+        }
+        
+        setTimeout(() => {
+            progressBar.style.width = "0%";
+            document.getElementById('fileLabel').innerText = "Choose File";
+            updateDashboardMetrics();
+        }, 1500);
+    }
+
+    function exportReport() {
+        // Reset dynamic cache values for mock UI demo environment parameters tracking reset
+        window.location.reload();
+    }
+
+    // Initialize Polling updates pipeline every 4 seconds
+    window.onload = () => {
+        lucide.createIcons();
+        updateDashboardMetrics();
+        setInterval(updateDashboardMetrics, 4000);
+
+        // Dummy static trend chart visual asset loader matching original structure template layouts rules
+        const trendCtx = document.getElementById('trendChart').getContext('2d');
+        trendChartObj = new Chart(trendCtx, {
+            type: 'line',
+            data: {
+                labels: ["00:00", "04:00", "08:00", "12:00", "16:00", "20:00"],
+                datasets: [{ label: 'Threat Severity Trend Vector', data: [5, 12, 45, 25, 70, 40], borderColor: '#58a6ff', tensor: 0.4, fill: true, backgroundColor: 'rgba(88, 166, 255, 0.1)' }]
+            },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { ticks: { color: '#c9d1d9' } }, y: { ticks: { color: '#c9d1d9' } } } }
+        });
+    };
+</script>
+</body>
+</html>

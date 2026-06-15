@@ -1,0 +1,512 @@
+/* ==========================================================================
+   AI-SOC CORE CSS ENGINE - ENTERPRISE THEMING CONFIGURATION
+   ========================================================================== */
+
+:root {
+    --bg-main: #080b11;
+    --bg-sidebar: #0f131a;
+    --bg-card: #131822;
+    --border-color: rgba(255, 255, 255, 0.06);
+    --text-primary: #f3f4f6;
+    --text-secondary: #9ca3af;
+    
+    /* System Visual Accents */
+    --accent-blue: #3b82f6;
+    --accent-red: #ef4444;
+    --accent-yellow: #f59e0b;
+    --accent-green: #10b981;
+    
+    /* Transparent Background Glow Layers */
+    --card-glow-red: rgba(239, 68, 68, 0.04);
+    --card-glow-yellow: rgba(245, 158, 11, 0.04);
+    --card-glow-green: rgba(16, 185, 129, 0.04);
+}
+
+/* Core Document Resets */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    overflow-x: hidden;
+    letter-spacing: -0.01em;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* App Viewport Flex Layout Container */
+.app-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* ==========================================================================
+   SIDEBAR NAVIGATION SYSTEM
+   ========================================================================== */
+.sidebar {
+    width: 260px;
+    background-color: var(--bg-sidebar);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    position: fixed;
+    height: 100vh;
+    z-index: 10;
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 40px;
+}
+
+.icon-logo {
+    color: var(--accent-red);
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+}
+
+.logo h2 {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--text-primary);
+}
+
+.nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.nav-links a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.nav-links a svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    background-color: rgba(255, 255, 255, 0.03);
+    color: var(--text-primary);
+}
+
+.nav-links a.active {
+    border-left: 3px solid var(--accent-blue);
+    background-color: rgba(59, 130, 246, 0.08);
+    padding-left: 13px; /* Visual balance adjust left border shift compensation ke liye */
+}
+
+/* ==========================================================================
+   MAIN VIEWPORT CONTENT SPACE
+   ========================================================================== */
+.main-content {
+    margin-left: 260px;
+    flex: 1;
+    padding: 40px;
+    max-width: 1600px;
+    width: calc(100% - 260px);
+}
+
+/* Main Top Header Controls */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 24px;
+}
+
+.header h1 {
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+}
+
+.header p {
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+.divider {
+    color: rgba(255, 255, 255, 0.15);
+    margin: 0 8px;
+}
+
+/* Real-Time Pulse Heartbeat Badge Components */
+.status-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(16, 185, 129, 0.06);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+    padding: 8px 16px;
+    border-radius: 20px;
+    flex-shrink: 0;
+}
+
+.status-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent-green);
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent-green);
+    border-radius: 50%;
+}
+
+.pulse {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    animation: pulse-animation 2s infinite;
+}
+
+.pulse-red {
+    background-color: var(--accent-red);
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+    animation: pulse-red-animation 2s infinite;
+}
+
+@keyframes pulse-animation {
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5); }
+    70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+@keyframes pulse-red-animation {
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.5); }
+    70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+/* ==========================================================================
+   CARDS & KPI STATS GRID LAYOUTS
+   ========================================================================== */
+.card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+}
+
+.grid {
+    display: grid;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.kpi-grid {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.kpi-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.kpi-info h4 {
+    color: var(--text-secondary);
+    font-size: 13px;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.kpi-info h1 {
+    font-size: 28px;
+    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.kpi-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.kpi-icon svg { width: 22px; height: 22px; }
+.kpi-icon.blue { background: rgba(59, 130, 246, 0.1); color: var(--accent-blue); }
+.kpi-icon.red { background: rgba(239, 68, 68, 0.1); color: var(--accent-red); }
+.kpi-icon.yellow { background: rgba(245, 158, 11, 0.1); color: var(--accent-yellow); }
+.kpi-icon.green { background: rgba(16, 185, 129, 0.1); color: var(--accent-green); }
+
+.kpi-card.danger { background: linear-gradient(to bottom right, var(--bg-card), var(--card-glow-red)); border-left: 3px solid var(--accent-red); }
+.kpi-card.warn { background: linear-gradient(to bottom right, var(--bg-card), var(--card-glow-yellow)); border-left: 3px solid var(--accent-yellow); }
+.kpi-card.success { background: linear-gradient(to bottom right, var(--bg-card), var(--card-glow-green)); border-left: 3px solid var(--accent-green); }
+
+/* ==========================================================================
+   LOG INGESTION / UPLOAD AREA COMPONENT
+   ========================================================================== */
+.upload-section {
+    background: linear-gradient(135deg, #141a27 0%, var(--bg-card) 100%);
+}
+
+.upload-header h3 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+    margin-bottom: 4px;
+}
+
+.upload-header p {
+    color: var(--text-secondary);
+    font-size: 13px;
+    margin-bottom: 20px;
+}
+
+.upload-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.file-drop-zone {
+    border: 1px dashed rgba(255, 255, 255, 0.15);
+    padding: 10px 16px;
+    border-radius: 8px;
+    background: rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    position: relative;
+    min-width: 250px;
+}
+
+/* Native file input ko safely hide aur customize karna layout patterns sync up ke liye */
+#fileInput {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    left: 0;
+    top: 0;
+}
+
+.btn-secondary {
+    color: var(--text-primary);
+    font-size: 13px;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Global Buttons Design System */
+.btn-group { display: flex; gap: 12px; }
+
+.btn {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+.btn-primary { background-color: var(--accent-blue); color: #fff; }
+.btn-primary:hover { background-color: #2563eb; transform: translateY(-1px); }
+.btn-outline { background: transparent; border: 1px solid rgba(255,255,255,0.15); color: var(--text-primary); }
+.btn-outline:hover { background: rgba(255,255,255,0.05); }
+
+/* Animation Progress Bar Pipeline */
+.progress-container { margin-top: 16px; }
+.progress-bar-wrapper {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+    overflow: hidden;
+}
+.progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent-blue), #60a5fa);
+    width: 0%;
+    transition: width 0.2s linear;
+}
+
+/* ==========================================================================
+   CHARTS & DATA GRAPH COMPONENT WRAPPERS
+   ========================================================================== */
+.chart-grid-2col { grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); }
+
+.chart-card h3, .table-card h3, .feed-card h3 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--text-primary);
+    border-left: 3px solid var(--accent-blue);
+    padding-left: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.chart-container { position: relative; height: 260px; width: 100%; }
+.visual-trend { height: 320px; }
+
+/* ==========================================================================
+   TABLE DESIGN SYSTEM
+   ========================================================================== */
+.table-responsive { overflow-x: auto; width: 100%; }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 14px;
+}
+
+th {
+    padding: 12px 16px;
+    color: var(--text-secondary);
+    font-weight: 500;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+td {
+    padding: 14px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    color: var(--text-primary);
+}
+
+tr:hover td { background-color: rgba(255, 255, 255, 0.01); }
+
+/* Injected System Status Badges Architecture (HTML key bindings fix) */
+.badge {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    font-family: 'JetBrains Mono', monospace;
+    display: inline-block;
+    text-transform: uppercase;
+}
+.badge.red, .badge-danger { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.2); }
+.badge.yellow, .badge-warn { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.2); }
+.badge.blue, .badge-info { background: rgba(59, 130, 246, 0.15); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.2); }
+
+/* ==========================================================================
+   REAL-TIME LOG FEED STREAM CORES & CONSOLES
+   ========================================================================== */
+.feed-container {
+    height: 300px;
+    overflow-y: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-right: 8px;
+}
+
+/* Custom Scrollbars configurations */
+.feed-container::-webkit-scrollbar { width: 4px; }
+.feed-container::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+.feed-container::-webkit-scrollbar-track { background: transparent; }
+
+/* Dynamic Ingested Output Rows Formats (index.html dynamically targets this) */
+.log-row {
+    padding: 8px 12px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    border-left: 3px solid rgba(255, 255, 255, 0.1);
+    color: #e5e7eb;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.6;
+}
+.log-row span { color: var(--text-secondary); margin-right: 6px; }
+.log-row code { color: #f2f5f8; font-weight: 500; background: rgba(255,255,255,0.04); padding: 2px 4px; border-radius: 4px; }
+
+/* Ingested Alerts Box Structures */
+.alert-item {
+    padding: 10px 14px;
+    border-radius: 6px;
+    background: rgba(0, 0, 0, 0.15);
+    border-left: 3px solid var(--accent-blue);
+    line-height: 1.5;
+    color: var(--text-primary);
+}
+.alert-item.crit { border-left-color: var(--accent-red); background: rgba(239, 68, 68, 0.02); }
+.alert-item code { color: #f87171; background: rgba(0,0,0,0.3); padding: 1px 4px; border-radius: 3px; font-weight: bold; }
+
+.live-indicator { display: inline-flex; align-items: center; margin-right: 6px; }
+.alert-bell { color: var(--accent-yellow); vertical-align: middle; }
+
+/* Footer */
+.footer {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 12px;
+    margin-top: 40px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 20px;
+    letter-spacing: 0.01em;
+}
+
+/* ==========================================================================
+   RESPONSIVE LAYOUT ENGINE (BREAKPOINTS CONTROL)
+   ========================================================================== */
+@media (max-width: 1200px) {
+    .chart-grid-2col { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 1024px) {
+    .sidebar { width: 70px; padding: 24px 10px; align-items: center; }
+    .logo h2, .nav-links a span, .nav-links a text-node { display: none; }
+    /* Navigation icons text labels suppression layout rules */
+    .nav-links a { padding: 12px; justify-content: center; width: 100%; }
+    .main-content { margin-left: 70px; width: calc(100% - 70px); padding: 24px; }
+}
+
+@media (max-width: 768px) {
+    .header { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .upload-controls { flex-direction: column; align-items: stretch; }
+    .file-drop-zone { width: 100%; }
+    .btn-group { justify-content: width 100%; }
+    .btn { justify-content: center; width: 100%; }
+}
