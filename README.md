@@ -218,17 +218,6 @@ Dashboard Visualization
 
 ---
 
-## 📸 Dashboard Preview
-
-Add screenshots here:
-
-```text
-assets/dashboard-overview.png
-assets/live-events.png
-assets/threat-analysis.png
-assets/response-engine.png
-```
-
 ---
 
 ## 🎯 Learning Objectives
